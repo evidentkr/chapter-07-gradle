@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		security.authorizeRequests().antMatchers("/").permitAll();
 		security.authorizeRequests().antMatchers("/member/**").authenticated(); // 로그인 되면 접근 가능한 페이지
 		security.authorizeRequests().antMatchers("/manager/**").hasRole("MANAGER");
+		security.authorizeRequests().antMatchers("/manager/**").hasRole("ADMIN");
 		security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 
 		//csrf 는 크로스사이트 위조 처리 관련 > restFull 을 사용하기 위해서는 disable()
