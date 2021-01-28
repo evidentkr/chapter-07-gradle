@@ -24,13 +24,29 @@ public class PasswordEncoderTest {
 	
 	@Test
 	public void testInsert() {
-		Member member = new Member();
-		member.setId("manager2");
-		member.setPassword(encoder.encode("manager2"));
-		member.setName("메니져덕배");
-		member.setRole(Role.ROLE_MANAGER);
-		member.setEnabled(true);
-		memberRepo.save(member);
-	}
 
+		Member member1 = new Member();
+		member1.setId("member");
+		member1.setPassword(encoder.encode("member123"));
+		member1.setName("회원");
+		member1.setRole(Role.ROLE_MEMBER);
+		member1.setEnabled(true);
+		memberRepo.save(member1);
+
+		Member member2 = new Member();
+		member2.setId("manager");
+		member2.setPassword(encoder.encode("manager123"));
+		member2.setName("매니저");
+		member2.setRole(Role.ROLE_MANAGER);
+		member2.setEnabled(true);
+		memberRepo.save(member2);
+
+		Member member3 = new Member();
+		member3.setId("admin");
+		member3.setPassword(encoder.encode("admin123"));
+		member3.setName("어드민");
+		member3.setRole(Role.ROLE_ADMIN);
+		member3.setEnabled(true);
+		memberRepo.save(member3);
+	}
 }
