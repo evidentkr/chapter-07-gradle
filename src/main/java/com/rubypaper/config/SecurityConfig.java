@@ -19,14 +19,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity security) throws Exception {
         //각 주소별 권한 설정
-        security.authorizeRequests().antMatchers("/").permitAll();
+        security.authorizeRequests().antMatchers("/", "/system/**","/h2-console/**","/profile").permitAll();
         security.authorizeRequests().antMatchers("/member/**").authenticated(); // 로그인 되면 접근 가능한 페이지
         security.authorizeRequests().antMatchers("/manager/**").hasRole("MANAGER");
-        security.authorizeRequests().antMatchers("/manager/**").hasRole("ADMIN");
+        //security.authorizeRequests().antMatchers("/manager/**").hasRole("ADMIN");
         security.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 
         //csrf 는 크로스사이트 위조 처리 관련 > restFull 을 사용하기 위해서는 disable()
         security.csrf().disable();
+
+        //h2 콘솔사용 가능하게 설정
+        security.headers().frameOptions().disable();
+
         //security.formLogin(); // 허용되지 않은 주소 접근시 디폴트 로그인 화면 보임
         //커스텀 로그인
         security.formLogin().loginPage("/login").defaultSuccessUrl("/loginSuccess", true); //사용자가 만든 로그인 보임
